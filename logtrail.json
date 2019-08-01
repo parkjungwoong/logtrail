@@ -22,12 +22,11 @@
           "offset": "offset"
         },
         "message_format": "{{{host_thread}}} {{{log_level}}} {{{message}}}",
-        "secondary_sort_field": "offset",
         "keyword_suffix" : "keyword"},
       "color_mapping" : { "field":"log_level","mapping": {"ERROR": "#FF0000","WARN": "#FFEF96","DEBUG": "#B5E7A0","TRACE": "#CFE0E8"} }
     }
     ,{
-      "es": { "default_index": "admin*"  },
+      "es": { "default_index": "adm*"  },
       "tail_interval_in_seconds": 10,
       "es_index_time_offset_in_seconds": 0,
       "display_timezone": "local",
@@ -47,7 +46,6 @@
           "offset": "offset"
         },
         "message_format": "{{{host_thread}}} {{{log_level}}} {{{message}}}",
-        "secondary_sort_field": "offset",
         "keyword_suffix" : "keyword"},
       "color_mapping" : { "field":"log_level","mapping": {"ERROR": "#FF0000","WARN": "#FFEF96","DEBUG": "#B5E7A0","TRACE": "#CFE0E8"} }
     }

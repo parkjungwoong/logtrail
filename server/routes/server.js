@@ -330,25 +330,33 @@ async function loadConfig(server, request) {
     id: 2
   }))._source;
 
+  const etcConfig = (await callWithInternalUser('get', {
+    index: '.logtrail',
+    type: 'config',
+    id: 3
+  }))._source;
+
+  if(etcConfig !== undefined && etcConfig.helpLink !== undefined) {
+    config.etc = { 'helpLink': etcConfig.helpLink };
+  }
+
   const userIndexList = (userConfig.list.filter(user => user.id === curUser.username))[0].indexList;
 
   if(userIndexList === '*') {
-    console.log('userIndexList === *');
     return config;
   }
 
-  const newConfig = {
-    'version': config.version,
-    'index_patterns': []
-  };
+  const indexPatterns = [];
 
   for(let i = 0; userIndexList.length > i; i++) {
     for(let j = 0; config.index_patterns.length > j; j++) {
       if(userIndexList[i] === config.index_patterns[j].es.default_index) {
-        newConfig.index_patterns.push(config.index_patterns[j]);
+        indexPatterns.push(config.index_patterns[j]);
       }
     }
   }
 
-  return newConfig;
+  config.index_patterns = indexPatterns;
+
+  return config;
 }

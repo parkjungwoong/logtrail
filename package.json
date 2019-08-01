@@ -1,6 +1,6 @@
 {
   "name": "logtrail",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "logtrail with login",
   "main": "index.js",
   "kibana": {

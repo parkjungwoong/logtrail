@@ -12,9 +12,25 @@ elastic 6.8 버전 이상 부터는 키바나 로그인 기능을 기본으로 �
 [여기](https://github.com/parkjungwoong/elastic-stack/blob/master/kibana/%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8%20%EA%B0%9C%EB%B0%9C%20%ED%99%98%EA%B2%BD%20%EC%84%A4%EC%A0%95.md) 참고하여 구성
 
 ## 설정 파일
+ - 로컬 파일 설정은 지원하지 않고 elasticsearch에 설정 정보를 입력
+    ```
+    #설정 파일 작성 후 저장
+    vi logtrail.json
+    #설정 파일 내용을 elasticsearch에 저장
+    curl -XPUT 'localhost:9200/.logtrail/config/1?pretty' -H 'Content-Type: application/json' -d@./logtrail.json -u el계정:el비밀번호
+    
+    #계정별 인덱스 정보 작성
+    vi user.json
+    curl -XPUT 'localhost:9200/.logtrail/config/2?pretty' -H 'Content-Type: application/json' -d@./user.json -u el계정:el비밀번호
+    
+    #검색 예시 링크
+    vi etcConfig.json
+    curl -XPUT 'localhost:9200/.logtrail/config/3?pretty' -H 'Content-Type: application/json' -d@./etcConfig.json -u el계정:el비밀번호
+    ```
  - 기본 설정 파일 형식은 [여기](https://github.com/sivasamyk/logtrail#configuration) 참고
  - 계정별 인덱스 리스트 예시 :
-     ```
+ 
+    ```
      {
        "list": [
          {
@@ -32,14 +48,9 @@ elastic 6.8 버전 이상 부터는 키바나 로그인 기능을 기본으로 �
        ]
      }
      ```
- - 로컬 파일 설정은 지원하지 않고 elasticsearch에 설정 정보를 입력
-    ```
-    #설정 파일 작성 후 저장
-    vi logtrail.json
-    #설정 파일 내용을 elasticsearch에 저장
-    curl -XPUT 'localhost:9200/.logtrail/config/1?pretty' -H 'Content-Type: application/json' -d@./logtrail.json -u el계정:el비밀번호
-    
-    #계정별 인덱스 정보 작성
-    vi user.json
-    curl -XPUT 'localhost:9200/.logtrail/config/2?pretty' -H 'Content-Type: application/json' -d@./user.json -u el계정:el비밀번호
-    ```
+ - 검색 예시 링크 :
+      ```
+      {
+        "helpLink": "www.naver.com"
+      }
+      ```

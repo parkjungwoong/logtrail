@@ -43,6 +43,7 @@ app.controller('logtrail', function ($scope, kbnUrl, $route, $routeParams,
   $scope.index_patterns = [];
   $scope.selected_index_pattern = null;
   $scope.popup = null;
+  $scope.searchExampleLink = 'https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-query-string-query.html#query-string-syntax';
   var updateViewInProgress = false;
   var tailTimer = null;
   var searchText = null;
@@ -97,6 +98,11 @@ app.controller('logtrail', function ($scope, kbnUrl, $route, $routeParams,
           $scope.userDateTimeSeeked = $routeParams.t;
         }
       }
+
+      if(resp.data.config.etc !== undefined && resp.data.config.etc.helpLink !== undefined) {
+        $scope.searchExampleLink = resp.data.config.etc.helpLink;
+      }
+
       initialize();
     });
   };
